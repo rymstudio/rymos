@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+# systemsettings entra come Recommends di kio6 (dipendenza di Calamares).
+# Niente autoremove: i moduli QML rimasti orfani servono allo slideshow.
+apt-get purge -y systemsettings

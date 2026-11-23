@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=RymOS Login Sound
+Exec=/usr/bin/paplay /usr/share/sounds/rymos/rymos-login.oga
+NoDisplay=true
+NotShowIn=GNOME-Greeter;

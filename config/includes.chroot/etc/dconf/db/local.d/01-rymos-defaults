@@ -1,0 +1,54 @@
+[org/gnome/desktop/interface]
+font-name='Inter 11'
+document-font-name='Inter 11'
+monospace-font-name='JetBrains Mono 11'
+font-antialiasing='rgba'
+font-hinting='slight'
+text-scaling-factor=1.0
+icon-theme='Papirus-Dark'
+color-scheme='prefer-dark'
+accent-color='yellow'
+gtk-theme='Adwaita-dark'
+
+[org/gnome/desktop/background]
+picture-uri='file:///usr/share/backgrounds/rymos/wave-HD-l.png'
+picture-uri-dark='file:///usr/share/backgrounds/rymos/wave-HD-d.png'
+picture-options='zoom'
+
+[org/gnome/desktop/wm/preferences]
+button-layout='appmenu:minimize,maximize,close'
+
+[org/gnome/desktop/sound]
+event-sounds=true
+input-feedback-sounds=false
+theme-name='freedesktop'
+
+
+[org/gnome/shell]
+disable-user-extensions=false
+enabled-extensions=['dash-to-panel@jderose9.github.com']
+
+[org/gnome/shell/extensions/dash-to-panel]
+intellihide=false
+animate-appicon-hover=true
+animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
+appicon-margin=4
+global-border-radius=2
+panel-side-padding=0
+panel-top-bottom-margins=4
+panel-top-bottom-padding=4
+panel-size=44
+show-apps-icon-file='/usr/share/pixmaps/rymos/rymos-launcher.png'
+show-apps-icon-side-padding=8
+show-apps-override-escape=true
+trans-bg-color='#2c3e50'
+trans-panel-opacity=0.9
+trans-use-custom-bg=true
+trans-use-custom-opacity=true
+hotkeys-overlay-combo='TEMPORARILY'
+window-preview-title-position='TOP'
+[org/gnome/mutter]
+overlay-key=''
+
+[org/gnome/shell/keybindings]
+toggle-application-view=['Super_L']

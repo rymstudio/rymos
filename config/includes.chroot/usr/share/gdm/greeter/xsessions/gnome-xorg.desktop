@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=GNOME on Xorg
+Exec=/usr/bin/gnome-session
+TryExec=/usr/bin/gnome-session
+Hidden=true

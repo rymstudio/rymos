@@ -1,0 +1,11 @@
+PRETTY_NAME="RymOS 1.0 Aurora"
+NAME="RymOS"
+VERSION_ID="1.0"
+VERSION="1.0 (Aurora)"
+VERSION_CODENAME=aurora
+ID=rymos
+ID_LIKE=debian
+HOME_URL="https://www.rymstudio.it/rymos"
+SUPPORT_URL="https://www.rymstudio.it/rymos"
+BUG_REPORT_URL="https://www.rymstudio.it/rymos"
+BUILD_ID="20261123-0912"

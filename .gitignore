@@ -1,0 +1,21 @@
+# Prodotti della build (live-build)
+/chroot/
+/binary/
+/cache/
+/.build/
+/auto/
+/local/
+/*.iso
+/build.log
+/binary.modified_timestamps
+/chroot.files
+/chroot.packages.*
+/live-image-amd64.*
+/wget-log*
+
+# Generati da "lb config" a ogni build (vedi build.sh)
+/config/binary
+/config/bootstrap
+/config/chroot
+/config/common
+/config/source

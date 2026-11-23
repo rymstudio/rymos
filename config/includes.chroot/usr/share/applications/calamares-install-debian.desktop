@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Install RymOS
+Name[it]=Installa RymOS
+GenericName=Calamares Installer
+Exec=calamares-install-debian
+Comment=Calamares — Installer for RymOS Live
+Comment[it]=Calamares — Programma di installazione di RymOS Live
+Keywords=calamares;system;install;rymos;installer
+Icon=install-rymos
+Terminal=false
+Categories=Qt;System;
+StartupWMClass=calamares
+StartupNotify=True

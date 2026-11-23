@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=RymOS Aurora
+Description=Splash screen di avvio RymOS
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/rymos
+ScriptFile=/usr/share/plymouth/themes/rymos/rymos.script

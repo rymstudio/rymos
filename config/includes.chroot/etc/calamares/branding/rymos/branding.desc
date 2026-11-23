@@ -1,0 +1,38 @@
+componentName:   rymos
+welcomeStyleCalamares: true
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 800px,580px
+windowPlacement: center
+
+strings:
+    productName:         RymOS
+    shortProductName:    RymOS
+    version:             "1.0"
+    shortVersion:        "1.0"
+    versionedName:       RymOS 1.0 Aurora
+    shortVersionedName:  RymOS 1.0
+    bootloaderEntryName: RymOS
+    productUrl:          https://www.rymstudio.it/rymos
+    supportUrl:          https://www.rymstudio.it/rymos
+    knownIssuesUrl:      https://www.rymstudio.it/rymos
+    releaseNotesUrl:     https://www.rymstudio.it/rymos
+    donateUrl:           https://www.rymstudio.it/rymos
+
+sidebar: widget
+navigation: widget
+
+images:
+    productLogo:         "rymos-logo.png"
+    productIcon:         "rymos-logo.png"
+    productWelcome:      "welcome.png"
+
+slideshow:               "show.qml"
+
+style:
+   SidebarBackground:    "#2c3e50"
+   SidebarText:          "#FFFFFF"
+   SidebarTextCurrent:   "#2c3e50"
+   SidebarBackgroundCurrent: "#fdf188"
+
+slideshowAPI: 2

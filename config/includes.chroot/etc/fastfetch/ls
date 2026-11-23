@@ -1,0 +1,27 @@
+{
+  "logo": {
+    "source": "/usr/share/fastfetch/logos/rymos.txt",
+    "type": "file"
+  },
+ "modules": [
+    "title",
+    "separator",
+    "os",
+    "host",
+    "kernel",
+    "uptime",
+    "packages",
+    "shell",
+    "display",
+    "terminal",
+    "cpu",
+    "gpu",
+    "memory",
+    "swap",
+    "disk",
+    "localip",
+    "locale",
+    "break",
+    "colors"
+  ]
+}

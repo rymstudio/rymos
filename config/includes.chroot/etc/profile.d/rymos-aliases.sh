@@ -1,0 +1,10 @@
+# RymOS global aliases
+alias apt='nala'
+alias apt-get='nala'
+alias update='sudo nala update'
+alias upgrade='sudo nala upgrade'
+alias install='sudo nala install'
+alias remove='sudo nala remove'
+alias search='nala search'
+alias cls='clear'
+alias fetch='fastfetch'

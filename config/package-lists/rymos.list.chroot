@@ -1,0 +1,158 @@
+# RymOS 1.0 Aurora - Package List
+# GNOME 48 Core
+gnome-session
+gnome-shell
+gnome-control-center
+gdm3
+nautilus
+blackbox-terminal
+gnome-text-editor
+loupe
+papers
+gnome-logs
+gnome-disk-utility
+gnome-calculator
+gnome-system-monitor
+gnome-software
+gnome-keyring
+gnome-backgrounds
+adwaita-icon-theme
+fonts-cantarell
+xdg-desktop-portal-gnome
+pipewire-audio
+xwayland
+
+# System
+nala
+fastfetch
+btop
+htop
+ncdu
+duf
+tmux
+git
+gnupg
+mc
+curl
+wget
+rsync
+p7zip-full
+unzip
+smartmontools
+ufw
+
+# custom software
+# vivaldi-stable
+
+# Fun CLI
+cmatrix
+figlet
+toilet
+cowsay
+sl
+
+# Mail & Comunicazione
+thunderbird
+gajim
+tuba
+
+# Gaming
+# steam-installer
+gamemode
+wine
+
+# Sistema & Utility
+flatpak
+gstreamer1.0-plugins-bad
+gstreamer1.0-plugins-ugly
+gstreamer1.0-libav
+timeshift
+filezilla
+remmina
+flameshot
+baobab
+cups
+sane-utils
+open-vm-tools-desktop
+
+# Sviluppo
+
+
+# Font
+fonts-inter
+fonts-noto
+fonts-jetbrains-mono
+fonts-firacode
+fonts-hack
+fonts-linuxlibertine
+fonts-ebgaramond
+fonts-montserrat
+
+# Browser
+firefox-esr
+
+# GNOME Extensions & Personalizzazione
+gnome-shell-extensions
+gnome-tweaks
+
+# Gestione sistema
+gparted
+gdebi
+
+# Rete
+net-tools
+
+# Scanner
+simple-scan
+
+# Sicurezza
+seahorse
+
+# Archivi
+file-roller
+
+# Multimedia
+
+# Produttività
+# libreoffice
+apostrophe
+
+
+# Repository esterni (Discord, Heroic)
+# da configurare separatamente
+gtk-update-icon-cache
+gnome-shell-extension-dash-to-panel
+
+# ── Multimedia e Gaming (base universale, GPU-agnostico) ──
+gstreamer1.0-plugins-good
+mesa-vulkan-drivers
+vulkan-tools
+mangohud
+papirus-icon-theme
+
+# ── Multimedia — aggiornamenti (24/6) ──
+gnome-music
+mpv
+celluloid
+imagemagick
+plymouth
+grub-efi-amd64
+grub-pc-bin
+chafa
+gnome-software-plugin-flatpak
+
+# Installer Calamares
+calamares
+calamares-settings-debian
+squashfs-tools
+btrfs-progs
+xfsprogs
+
+# Lingue Firefox e Thunderbird (tutte)
+firefox-esr-l10n-all
+thunderbird-l10n-all
+
+# cifratura del disco
+cryptsetup
+cryptsetup-initramfs
+keyutils

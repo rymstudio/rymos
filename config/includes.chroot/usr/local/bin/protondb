@@ -1,0 +1,202 @@
+#!/bin/bash
+
+# ProtonDB Shell Query Tool - Optimized Version 1.3
+# Search games on ProtonDB and display results
+# by b3lz3bu - rymstudio 2026 - https://www.rymstudio.it
+# optimized by madghino 2026 go to version 1.3
+# requires "chafa" for image rendering
+
+set -euo pipefail
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[1;37m'
+GRAY='\033[0;90m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+# Function to show a colored badge for the tier
+show_tier_badge() {
+  local tier="$1"
+  case "${tier,,}" in
+  "platinum" | "platino") echo -e "${WHITE}${BOLD}[✓ PLATINUM]${RESET}" ;;
+  "gold" | "oro") echo -e "${YELLOW}${BOLD}[★ GOLD]${RESET}" ;;
+  "silver" | "argento") echo -e "${GRAY}${BOLD}[◆ SILVER]${RESET}" ;;
+  "bronze" | "bronzo") echo -e "${RED}${BOLD}[● BRONZE]${RESET}" ;;
+  "borked" | "rotto") echo -e "${RED}${BOLD}[✗ BORKED]${RESET}" ;;
+  "native" | "nativo") echo -e "${GREEN}${BOLD}[▶ NATIVE]${RESET}" ;;
+  "pending") echo -e "${BLUE}${BOLD}[⧗ PENDING]${RESET}" ;;
+  *) echo -e "${GRAY}[? UNKNOWN]${RESET}" ;;
+  esac
+}
+
+# Function to display image in the shell
+show_image() {
+  local url="$1"
+  local tmp_img="/tmp/protondb_img_$$.jpg"
+
+  if curl -s -f -o "$tmp_img" "$url" 2>/dev/null; then
+    if command -v chafa &>/dev/null; then
+      chafa -s 68x20 "$tmp_img" 2>/dev/null
+    elif command -v catimg &>/dev/null; then
+      catimg -w 70 "$tmp_img" 2>/dev/null
+    elif command -v img2txt &>/dev/null; then
+      img2txt -W 70 -H 22 "$tmp_img" 2>/dev/null
+    fi
+    rm -f "$tmp_img"
+  fi
+}
+
+# Function to get info from ProtonDB summary API
+get_protondb_info() {
+  local steam_id="$1"
+  local protondb_summary="https://www.protondb.com/api/v1/reports/summaries/${steam_id}.json"
+
+  curl -s "$protondb_summary" 2>/dev/null | python3 -c "
+import sys, json
+try:
+    data = json.load(sys.stdin)
+    tier = data.get('tier', data.get('trendingTier', ''))
+    print(tier.lower() if tier else '')
+except:
+    pass
+" 2>/dev/null
+}
+
+# Function to search games on Steam and extract data in one single pass
+search_steam_games() {
+  local query="$1"
+  local encoded=$(echo "$query" | sed 's/ /+/g')
+  local steam_search="https://store.steampowered.com/api/storesearch/?term=${encoded}&l=english&cc=US"
+
+  curl -s "$steam_search" | python3 -c "
+import sys, json
+try:
+    data = json.load(sys.stdin)
+    items = data.get('items', [])[:5]
+    for item in items:
+        sid = item['id']
+        img = item.get('tiny_image', '')
+        if 'capsule_sm' in img:
+            img = f'https://cdn.akamai.steamstatic.com/steam/apps/{sid}/header.jpg'
+        print(f\"{sid}|{item['name']}|{img}\")
+except:
+    pass
+" 2>/dev/null
+}
+
+# Function to display a result
+show_result() {
+  local title="$1"
+  local tier="$2"
+  local image_url="$3"
+  local steam_id="$4"
+  local is_primary="$5"
+
+  if [ "$is_primary" = "true" ]; then
+    echo -e "${MAGENTA}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
+    echo -e "${MAGENTA}${BOLD}${RESET} ${CYAN}${BOLD}MAIN RESULT${RESET}                                                   ${MAGENTA}${BOLD}${RESET}"
+    echo -e "${MAGENTA}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
+
+    if [ -n "$image_url" ]; then
+      show_image "$image_url"
+      echo ""
+    fi
+
+    echo -e "${WHITE}${BOLD}${title}${RESET}"
+    echo -e "Steam ID: ${CYAN}${steam_id}${RESET}"
+
+    if [ -n "$tier" ] && [ "$tier" != "null" ]; then
+      echo -e "ProtonDB Compatibility: $(show_tier_badge "$tier")"
+    else
+      echo -e "ProtonDB Compatibility: ${GRAY}No data available${RESET}"
+    fi
+
+    echo -e "\n${BLUE}🔗 ProtonDB: ${RESET}https://www.protondb.com/app/${steam_id}"
+    echo -e "${BLUE}🔗 Steam: ${RESET}https://store.steampowered.com/app/${steam_id}"
+    echo -e "\n${GRAY}────────────────────────────────────────────────────────────────────${RESET}\n"
+  else
+    echo -e "${BLUE}▸ ${WHITE}${title}${RESET} ${GRAY}(Steam ID: ${steam_id})${RESET}"
+    if [ -n "$tier" ] && [ "$tier" != "null" ]; then
+      echo -e "  $(show_tier_badge "$tier")"
+    else
+      echo -e "  ${GRAY}No ProtonDB data${RESET}"
+    fi
+    echo ""
+  fi
+}
+
+# Main
+if [ $# -eq 0 ]; then
+  echo -e "${RED}${BOLD}Error: Missing required arguments.${RESET}"
+  echo -e "\n${WHITE}${BOLD}Usage:${RESET}"
+  echo -e "  $(basename "$0") <game_name>"
+  echo -e "\n${WHITE}${BOLD}Arguments:${RESET}"
+  echo -e "  ${CYAN}<game_name>${RESET}    The title of the game you want to search for (wrap in quotes if it contains spaces)."
+  echo -e "\n${WHITE}${BOLD}Examples:${RESET}"
+  echo -e "  $(basename "$0") \"Diablo IV\""
+  echo -e "  $(basename "$0") Cyberpunk"
+  exit 1
+fi
+
+if ! command -v python3 &>/dev/null; then
+  echo -e "${RED}Error: python3 is required for JSON parsing${RESET}"
+  exit 1
+fi
+
+query="$*"
+
+echo -e "${CYAN}${BOLD}"
+cat <<"EOF"
+╔═══════════════════════════════════════════════════════════════════╗
+║                                                                   ║
+║   ██████╗ ██████╗  ██████╗ ████████╗ ██████╗ ███╗  ██╗            ║
+║   ██╔══██╗██╔══██╗██╔═══██╗╚══██╔══╝██╔═══██╗████╗  ██║           ║
+║   ██████╔╝██████╔╝██║   ██║   ██║   ██║   ██║██╔██╗ ██║           ║
+║   ██╔═══╝ ██╔══██╗██║   ██║   ██║   ██║   ██║██║╚██╗██║           ║
+║   ██║     ██║  ██║╚██████╔╝   ██║   ╚██████╔╝██║ ╚████║           ║
+║   ╚═╝     ╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚═════╝ ╚═╝  ╚═══╝            ║
+║                                                                   ║
+║                    PROTONDB QUERY TOOL - RYMSTUDIO 2026           ║
+╚═══════════════════════════════════════════════════════════════════╝
+EOF
+echo -e "${RESET}"
+
+echo -e "\n${CYAN}${BOLD}🔍 Searching for '${query}' on Steam...${RESET}\n"
+
+results=$(search_steam_games "$query")
+
+if [ -z "$results" ]; then
+  echo -e "${RED}No results found for '${query}'${RESET}"
+  exit 1
+fi
+
+echo -e "${WHITE}${BOLD}═══════════════════════════════════════════════════════════════════${RESET}"
+echo -e "${GREEN}${BOLD}  RESULTS FOUND${RESET}"
+echo -e "${WHITE}${BOLD}═══════════════════════════════════════════════════════════════════${RESET}\n"
+
+count=0
+while IFS='|' read -r steam_id name image_url; do
+  count=$((count + 1))
+
+  if [ $count -eq 1 ]; then
+    echo -e "${GRAY}📊 Fetching data from ProtonDB...${RESET}"
+    tier=$(get_protondb_info "$steam_id")
+    show_result "$name" "$tier" "$image_url" "$steam_id" "true"
+  else
+    tier=$(get_protondb_info "$steam_id")
+    show_result "$name" "$tier" "" "$steam_id" "false"
+  fi
+done <<<"$results"
+
+echo -e "${WHITE}${BOLD}═══════════════════════════════════════════════════════════════════${RESET}"
+echo -e "${GREEN}Want to see more details? Visit: ${CYAN}https://www.protondb.com${RESET}\n"
+
+if ! command -v chafa &>/dev/null && ! command -v catimg &>/dev/null && ! command -v img2txt &>/dev/null; then
+  echo -e "${YELLOW}💡 Tip: Install 'chafa' to see images in the terminal:${RESET}\n"
+fi

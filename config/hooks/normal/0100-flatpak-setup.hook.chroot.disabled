@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+# Aggiungi Flathub
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+# Installa applicazioni Flatpak
+flatpak install -y flathub com.discordapp.Discord
+flatpak install -y flathub com.heroicgameslauncher.hgl
+flatpak install -y flathub com.github.tchx84.Flatseal
+flatpak install -y flathub io.github.localsend.localsend
+flatpak install -y flathub io.github.sn99.sniffnet
+flatpak install -y flathub org.pcsx2.PCSX2
+flatpak install -y flathub org.godotengine.Godot

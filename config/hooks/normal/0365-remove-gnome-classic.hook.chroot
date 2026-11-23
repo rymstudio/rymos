@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+# gnome-classic entra come Recommends di gnome-shell-extensions.
+# Niente autoremove: le estensioni dipendono da pacchetti separati e devono restare.
+apt-get purge -y gnome-classic gnome-classic-xsession

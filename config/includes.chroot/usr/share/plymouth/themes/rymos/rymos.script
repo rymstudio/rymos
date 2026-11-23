@@ -1,0 +1,94 @@
+Window.SetBackgroundTopColor(0.094, 0.149, 0.220);
+Window.SetBackgroundBottomColor(0.094, 0.149, 0.220);
+
+splash_image = Image("bback.png");
+
+screen_ratio = Window.GetHeight() / Window.GetWidth();
+image_ratio = splash_image.GetHeight() / splash_image.GetWidth();
+
+if (screen_ratio > image_ratio) {
+    scale_factor = Window.GetHeight() / splash_image.GetHeight();
+} else {
+    scale_factor = Window.GetWidth() / splash_image.GetWidth();
+}
+
+scaled_image = splash_image.Scale(splash_image.GetWidth() * scale_factor, splash_image.GetHeight() * scale_factor);
+splash_sprite = Sprite(scaled_image);
+splash_sprite.SetX(Window.GetWidth() / 2 - scaled_image.GetWidth() / 2);
+splash_sprite.SetY(Window.GetHeight() / 2 - scaled_image.GetHeight() / 2);
+
+# --- Richiesta password per i dischi cifrati ---
+box_image = Image("box.png");
+box_x = Window.GetWidth() / 2 - box_image.GetWidth() / 2;
+box_y = Window.GetHeight() / 2 - box_image.GetHeight() / 2;
+box_sprite = Sprite(box_image);
+box_sprite.SetPosition(box_x, box_y, 10);
+box_sprite.SetOpacity(0);
+
+title_sprite = Sprite();
+title_sprite.SetZ(11);
+prompt_sprite = Sprite();
+prompt_sprite.SetZ(11);
+bullets_sprite = Sprite();
+bullets_sprite.SetZ(11);
+
+caps_image = Image.Text("caps lock is on", 1, 0.85, 0.4, 1, "Sans 11");
+caps_sprite = Sprite(caps_image);
+caps_sprite.SetPosition(Window.GetWidth() / 2 - caps_image.GetWidth() / 2, box_y + box_image.GetHeight() + 14, 11);
+caps_sprite.SetOpacity(0);
+password_visible = 0;
+
+lock_image = Image("lock.png");
+lock_sprite = Sprite(lock_image);
+lock_sprite.SetPosition(box_x + 28, box_y + box_image.GetHeight() / 2 - lock_image.GetHeight() / 2, 11);
+lock_sprite.SetOpacity(0);
+
+fun display_password_callback(prompt, bullets) {
+    box_sprite.SetOpacity(1);
+    global.password_visible = 1;
+    lock_sprite.SetOpacity(1);
+
+    title_image = Image.Text("disk password", 1, 1, 1, 1, "Sans 15");
+    title_sprite.SetImage(title_image);
+    title_sprite.SetPosition(Window.GetWidth() / 2 - title_image.GetWidth() / 2, box_y + 34 - title_image.GetHeight() / 2, 11);
+    title_sprite.SetOpacity(1);
+
+    prompt_image = Image.Text(prompt, 0.8, 0.8, 0.8, 1, "Sans 10");
+    prompt_sprite.SetImage(prompt_image);
+    prompt_sprite.SetPosition(Window.GetWidth() / 2 - prompt_image.GetWidth() / 2, box_y + 66 - prompt_image.GetHeight() / 2, 11);
+    prompt_sprite.SetOpacity(1);
+
+    text = "";
+    for (i = 0; i < bullets; i++)
+        text = text + "●";
+    if (bullets > 0) {
+        bullets_image = Image.Text(text, 1, 1, 1, 1, "Sans 18");
+        bullets_sprite.SetImage(bullets_image);
+        bullets_sprite.SetPosition(Window.GetWidth() / 2 - bullets_image.GetWidth() / 2, box_y + 108 - bullets_image.GetHeight() / 2, 11);
+        bullets_sprite.SetOpacity(1);
+    } else {
+        bullets_sprite.SetOpacity(0);
+    }
+}
+
+fun display_normal_callback() {
+    global.password_visible = 0;
+    caps_sprite.SetOpacity(0);
+    lock_sprite.SetOpacity(0);
+    box_sprite.SetOpacity(0);
+    title_sprite.SetOpacity(0);
+    prompt_sprite.SetOpacity(0);
+    bullets_sprite.SetOpacity(0);
+}
+
+Plymouth.SetDisplayPasswordFunction(display_password_callback);
+Plymouth.SetDisplayNormalFunction(display_normal_callback);
+
+fun refresh_callback() {
+    if (global.password_visible && Plymouth.GetCapslockState())
+        caps_sprite.SetOpacity(1);
+    else
+        caps_sprite.SetOpacity(0);
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);

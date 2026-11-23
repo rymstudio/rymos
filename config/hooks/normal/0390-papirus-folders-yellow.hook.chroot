@@ -1,0 +1,23 @@
+#!/bin/bash
+set -e
+
+# RymOS: cartelle Papirus gialle, coerenti con l'accento 'yellow'.
+# Cambia solo i collegamenti generici (folder*.svg, user-*.svg) che puntano
+# alla variante blue. 96/128 px, @2x, Papirus-Dark e Papirus-Light usano
+# queste cartelle tramite collegamenti; a 16 px le cartelle sono monocromatiche.
+n=0
+for d in 22x22 24x24 32x32 48x48 64x64; do
+    cd "/usr/share/icons/Papirus/$d/places"
+    for l in folder*.svg user-*.svg; do
+        [ -L "$l" ] || continue
+        case "$l" in folder-blue*|user-blue*) continue ;; esac
+        t=$(readlink "$l")
+        case "$t" in
+            folder-blue.svg|folder-blue-*|user-blue-*)
+                ln -sfn "${t/-blue/-yellow}" "$l"
+                n=$((n + 1))
+                ;;
+        esac
+    done
+done
+echo "RymOS: $n collegamenti delle cartelle Papirus portati su yellow"

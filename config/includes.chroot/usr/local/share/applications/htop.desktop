@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Htop
+Exec=htop
+Icon=htop
+Terminal=true
+NoDisplay=true

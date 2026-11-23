@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+# Crea il profilo dconf
+mkdir -p /etc/dconf/profile/
+cat > /etc/dconf/profile/user << 'EOF'
+user-db:user
+system-db:local
+EOF
+
+# Compila il database dconf
+dconf update

@@ -1,0 +1,16 @@
+{
+  "policies": {
+    "SearchEngines": {
+      "Add": [
+        {
+          "Name": "rymsearch",
+          "Description": "SearXNG - istanza rymstudio",
+          "Alias": "r",
+          "Method": "GET",
+          "URLTemplate": "https://search.rymstudio.it/search?q={searchTerms}"
+        }
+      ],
+      "Default": "rymsearch"
+    }
+  }
+}

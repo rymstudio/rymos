@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=ImageMagick (color depth=q16)
+Exec=/usr/bin/display-im7.q16 -nostdin %F
+Icon=display-im7.q16
+Terminal=false
+NoDisplay=true

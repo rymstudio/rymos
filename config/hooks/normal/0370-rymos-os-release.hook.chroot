@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+# RymOS: protegge os-release dagli aggiornamenti di base-files.
+# Il file Debian viene deviato su /usr/lib/os-release.debian: gli aggiornamenti
+# di base-files scriveranno lì e non sul file RymOS.
+dpkg-divert --local --rename --divert /usr/lib/os-release.debian --add /usr/lib/os-release
+
+# Il file RymOS (da includes.chroot, con il BUILD_ID scritto da build.sh)
+# prende il posto di /usr/lib/os-release; /etc/os-release torna un collegamento.
+mv /etc/os-release /usr/lib/os-release
+ln -s ../usr/lib/os-release /etc/os-release

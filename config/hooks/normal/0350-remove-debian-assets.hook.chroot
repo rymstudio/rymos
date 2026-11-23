@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+# Rimuovi icone utente default Debian (i .jpg)
+# I .png sono le icone personalizzate RymOS, si salvano
+rm -f /usr/share/pixmaps/faces/*.jpg
+
+# Rimuovi loghi Debian da pixmaps
+# rm -f /usr/share/pixmaps/debian-logo.png
+# rm -f /usr/share/pixmaps/debian-security.png
+
+# Rimuovi temi sfondi Debian
+rm -rf /usr/share/desktop-base/
+rm -rf /usr/share/images/desktop-base/
+
+# Rimuovi le descrizioni degli sfondi Debian (puntano ai file cancellati sopra)
+rm -f /usr/share/gnome-background-properties/debian-*.xml

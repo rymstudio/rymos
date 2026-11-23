@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=CMatrix
+Exec=cmatrix
+Icon=cmatrix
+Terminal=true
+NoDisplay=true
