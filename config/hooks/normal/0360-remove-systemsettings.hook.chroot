@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e
 # systemsettings entra come Recommends di kio6 (dipendenza di Calamares).
-# Niente autoremove: i moduli QML rimasti orfani servono allo slideshow.
+# I moduli QML dello slideshow (qml6-module-qtquick, -window) sono nella lista
+# pacchetti, quindi l'autoremove toglie solo le librerie KDE rimaste orfane.
 apt-get purge -y systemsettings
+apt-get autoremove --purge -y

@@ -144,6 +144,9 @@ gnome-software-plugin-flatpak
 # Installer Calamares
 calamares
 calamares-settings-debian
+qml6-module-qtquick
+qml6-module-qtquick-window
+mokutil
 squashfs-tools
 btrfs-progs
 xfsprogs
