@@ -6,6 +6,10 @@
 /auto/
 /local/
 /*.iso
+/*.tar
+/source/
+/source.modified_timestamps
+/live-image-source.*
 /build.log
 /binary.modified_timestamps
 /chroot.files

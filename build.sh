@@ -24,9 +24,14 @@ lb config \
   --iso-publisher "RymStudio" \
   --iso-volume "RymOS 1.0 Aurora" \
   --memtest none \
-  --win32-loader false
+  --win32-loader false \
+  --source true \
+  --source-images tar
 
 echo "Build in corso..."
 lb build 2>&1 | tee build.log
 mv live-image-amd64.hybrid.iso "$ISO_NAME"
+mv live-image-source.debian.tar "RymOS-1.0-Aurora-amd64-${BUILD_ID}-source-debian.tar"
+mv live-image-source.live.tar "RymOS-1.0-Aurora-amd64-${BUILD_ID}-source-live.tar"
+echo "Sorgenti pronti: RymOS-1.0-Aurora-amd64-${BUILD_ID}-source-*.tar"
 echo "ISO pronta: $ISO_NAME"
