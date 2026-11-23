@@ -1,0 +1,30 @@
+RymOS 1.0 "Aurora" - Risorse grafiche e sonore
+
+I file elencati qui sotto sono distribuiti con licenza
+Creative Commons Attribuzione - Condividi allo stesso modo 4.0
+Internazionale (CC BY-SA 4.0):
+https://creativecommons.org/licenses/by-sa/4.0/deed.it
+
+Grafiche e sfondi
+  /usr/share/backgrounds/rymos/
+  /usr/share/plymouth/themes/rymos/
+  /usr/share/images/rymos/
+  /usr/share/pixmaps/rymos/
+  /usr/share/pixmaps/faces/
+  /usr/share/pixmaps/install-rymos.png
+  /etc/calamares/branding/rymos/
+  Autore: b3lz3bu - RymStudio
+
+Suono di accesso
+  /usr/share/sounds/rymos/rymos-login.oga
+  Autore: Michele Nucera
+
+Logo Debian
+  Gli sfondi debian-girl-by-rymos-4K e debian-di-rymos-1920.1080-4K
+  contengono il logo Debian "open use", (c) Software in the Public
+  Interest, Inc., usato secondo i termini indicati in
+  https://www.debian.org/logos/
+
+I programmi inclusi in RymOS mantengono le proprie licenze:
+per ogni pacchetto vedi /usr/share/doc/<pacchetto>/copyright.
+Sorgenti: https://www.rymstudio.it/rymos
