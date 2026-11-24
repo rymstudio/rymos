@@ -20,7 +20,7 @@ Suono di accesso
   Autore: Michele Nucera
 
 Logo Debian
-  Gli sfondi debian-girl-by-rymos-4K e debian-di-rymos-1920.1080-4K
+  Gli sfondi debian-girl-by-rymos-HD e debian-di-rymos-1920.1080-HD
   contengono il logo Debian "open use", (c) Software in the Public
   Interest, Inc., usato secondo i termini indicati in
   https://www.debian.org/logos/
