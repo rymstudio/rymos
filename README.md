@@ -67,6 +67,8 @@ sudo ./build.sh
 
 ## Licenze
 
+- Gli script e i file di configurazione di questo repository (`build.sh`, hook, liste dei
+  pacchetti, impostazioni) sono distribuiti con licenza **MIT**: vedi il file [LICENSE](LICENSE).
 - I programmi inclusi mantengono le loro licenze (vedi `/usr/share/doc/<pacchetto>/copyright`
   nel sistema).
 - Grafiche, sfondi e suono di accesso di rymOS sono distribuiti con licenza
